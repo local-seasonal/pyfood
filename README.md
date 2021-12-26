@@ -114,7 +114,7 @@ vegetables_in_season = shelf.get_seasonal_food(key='002')
 
 ## Useful links
 
-- [Documentation]() See `docs/build/index.html`
+- [Documentation](https://pyfood.readthedocs.io/en/latest/)
 - [Issue tracker](https://github.com/local-seasonal/pyfood/issues)
 - [Package releases](https://pypi.org/project/pyfood/#history)
 
