@@ -1,0 +1,577 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pyfood.utils &mdash; Pyfood 0.0.1 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Pyfood
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../assets.html">Pyfood Assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute.html">Contribute</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Example gallery:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">🌰 Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Pyfood</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>pyfood.utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for pyfood.utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">unidecode</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="k">import</span> <span class="n">cosine_similarity</span>
+<span class="kn">from</span> <span class="nn">scipy.sparse</span> <span class="k">import</span> <span class="n">csr_matrix</span><span class="p">,</span> <span class="n">load_npz</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span>
+
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">prefix</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="s1">&#39;assets&#39;</span><span class="p">,</span><span class="s1">&#39;nutri&#39;</span><span class="p">,</span><span class="s1">&#39;units.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="s1">&#39;assets&#39;</span><span class="p">,</span><span class="s1">&#39;nutri&#39;</span><span class="p">,</span><span class="s1">&#39;nutrimap.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">nutrimap</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="s1">&#39;assets&#39;</span><span class="p">,</span><span class="s1">&#39;nutri&#39;</span><span class="p">,</span><span class="s1">&#39;vnr.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+    <span class="n">vnr</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">lists2object</span><span class="p">(</span><span class="n">foodnames</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">quantities</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">unit_list</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">taxons</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot; Returns a list of dict from multiple lists. &quot;&quot;&quot;</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">foodnames</span><span class="p">,</span> <span class="n">quantities</span><span class="p">,</span> <span class="n">unit_list</span><span class="p">,</span> <span class="n">taxons</span><span class="p">):</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;foodname&#39;</span><span class="p">:</span><span class="n">u</span><span class="p">,</span> <span class="s1">&#39;quantity&#39;</span><span class="p">:</span><span class="n">v</span><span class="p">,</span> <span class="s1">&#39;unit&#39;</span><span class="p">:</span><span class="n">w</span><span class="p">,</span><span class="s1">&#39;taxon&#39;</span><span class="p">:</span><span class="n">x</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">output</span>
+
+
+<span class="k">def</span> <span class="nf">str2float</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Converts a string to a float. &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">&#39;/&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">string</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">except</span><span class="p">:</span>
+         <span class="k">return</span> <span class="mf">1.0</span>
+
+<span class="k">def</span> <span class="nf">str2ngrams</span><span class="p">(</span><span class="n">string</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot; Converts a string to a list of ngrams (monogram, bigram, trigram). &quot;&quot;&quot;</span>
+    <span class="n">ngrams</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="c1"># monograms</span>
+    <span class="n">token_list</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">token_list</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
+        <span class="n">ngrams</span> <span class="o">+=</span> <span class="p">[</span><span class="n">w1</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">w2</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">w3</span> <span class="k">for</span> <span class="n">w1</span><span class="p">,</span><span class="n">w2</span><span class="p">,</span><span class="n">w3</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">token_list</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">token_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">token_list</span><span class="p">[</span><span class="mi">2</span><span class="p">:])]</span> <span class="c1"># trigrams</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">token_list</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">ngrams</span> <span class="o">+=</span> <span class="p">[</span><span class="n">w1</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="n">w2</span> <span class="k">for</span> <span class="n">w1</span><span class="p">,</span><span class="n">w2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">token_list</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">token_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span> <span class="c1"># bigrams</span>
+    <span class="k">return</span> <span class="n">ngrams</span>
+
+
+
+<div class="viewcode-block" id="Shelf"><a class="viewcode-back" href="../../api/index.html#pyfood.utils.Shelf">[docs]</a><span class="k">class</span> <span class="nc">Shelf</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pyfood shelf embedded in a given region, month_id and optionally source language&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Shelf.__init__"><a class="viewcode-back" href="../../api/index.html#pyfood.utils.Shelf.__init__">[docs]</a>    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">region</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;EU&#39;</span><span class="p">,</span> <span class="n">lang_source</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;un&#39;</span><span class="p">,</span> <span class="n">month_id</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Instantiates a shelf from a context (region, lang_source, month_id).&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang_source</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">month_id</span> <span class="o">=</span> <span class="n">region</span><span class="p">,</span> <span class="n">lang_source</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">month_id</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="s1">&#39;assets&#39;</span><span class="p">,</span><span class="s1">&#39;vocab&#39;</span><span class="p">,</span><span class="s1">&#39;mapping.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">mapping</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span> <span class="c1"># food univeral mapping (f2id, id2f)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lang_source</span><span class="p">]</span> <span class="c1"># load session&#39;s language for basket of food (BOW) representation</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="s1">&#39;assets&#39;</span><span class="p">,</span><span class="s1">&#39;vocab&#39;</span><span class="p">,</span><span class="s1">&#39;feats.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feats</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span> <span class="c1"># food attributes {food_id: {&#39;taxon&#39;: , &#39;fr&#39;: , &#39;es&#39;: , &#39;en&#39;: , &#39;default_weight&#39;: , &#39;default_density&#39;: , &#39;benefits/diet&#39;: , nutri...}}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">n_ingredients</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feats</span><span class="p">)</span> <span class="c1"># total number of ingredients</span>
+    
+        <span class="bp">self</span><span class="o">.</span><span class="n">seasonal_matrix</span> <span class="o">=</span> <span class="n">load_npz</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="s1">&#39;assets&#39;</span><span class="p">,</span><span class="s1">&#39;seasons&#39;</span><span class="p">,</span><span class="s1">&#39;sparse_seasons_</span><span class="si">{}</span><span class="s1">.npz&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">region</span><span class="p">)))</span> <span class="c1"># domain expert knowledge (n_seasons, n_food) varies by &#39;regions&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seasonal_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seasonal_matrix</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">month_id</span><span class="p">]</span><span class="o">.</span><span class="n">toarray</span><span class="p">())</span> <span class="c1"># local and seasonal ingredients   ##### map2producers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tfidf</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># language model (ngrams2vec)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># RBM model (revise)</span></div>
+
+<div class="viewcode-block" id="Shelf.get_seasonal_food"><a class="viewcode-back" href="../../api/index.html#pyfood.utils.Shelf.get_seasonal_food">[docs]</a>    <span class="k">def</span> <span class="nf">get_seasonal_food</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;001&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns what food is in season</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        key : str</span>
+<span class="sd">            taxon code (fruits: 001, vegetables: 002, ..., mushrooms: 005)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ----------</span>
+<span class="sd">        list</span>
+<span class="sd">            seasonal_food: Food in seasons in self.region, self.month_id and self.lang_source</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">seasonal_food</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seasonal_vector</span><span class="o">&gt;</span><span class="mf">0.</span><span class="p">):</span>
+            <span class="n">feats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feats</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">fid</span><span class="p">))]</span>
+            <span class="n">foodname</span> <span class="o">=</span> <span class="n">feats</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lang_source</span><span class="p">]</span>
+            <span class="n">taxon</span> <span class="o">=</span> <span class="n">feats</span><span class="p">[</span><span class="s1">&#39;taxon&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">taxon</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+                <span class="n">seasonal_food</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">foodname</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>
+        <span class="n">seasonal_food</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">seasonal_food</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">seasonal_food</span><span class="p">)</span></div>
+    
+    <span class="k">def</span> <span class="nf">get_urls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food_list</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">feats</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="s1">&#39;f2id&#39;</span><span class="p">][</span><span class="n">foodname</span><span class="o">.</span><span class="n">lower</span><span class="p">()])][</span><span class="s1">&#39;url&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">foodname</span> <span class="ow">in</span> <span class="n">food_list</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_nutri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food_list</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">category</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;minerals&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+        <span class="n">nutri_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">foodname</span> <span class="ow">in</span> <span class="n">food_list</span><span class="p">:</span>
+            <span class="c1">#fid = str(self.mapping[&#39;f2id&#39;][foodname.lower()])</span>
+            <span class="c1">#if category == &#39;minerals&#39;:</span>
+            <span class="c1">#    nutri_tags = self.feats[fid][&#39;top_Minerals&#39;]</span>
+            <span class="c1">#else:</span>
+            <span class="c1">#    nutri_tags = self.feats[fid][&#39;top_Vitamins&#39;]</span>
+            <span class="c1">#nutri_list.append(nutri_tags)</span>
+            <span class="n">nutri_list</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="k">return</span> <span class="n">nutri_list</span>
+
+    <span class="k">def</span> <span class="nf">load_tfidf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Loads self.lang_source language model. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tfidf</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tfidf</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="s1">&#39;assets&#39;</span><span class="p">,</span><span class="s1">&#39;vocab&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/tfidf_</span><span class="si">{}</span><span class="s1">.pickle&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lang_source</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang_source</span><span class="p">)),</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span> <span class="c1"># ngram vectorizer for food names</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ngrams</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="s1">&#39;assets&#39;</span><span class="p">,</span><span class="s1">&#39;vocab&#39;</span><span class="p">,</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">/ngrams_</span><span class="si">{}</span><span class="s1">.pickle&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lang_source</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang_source</span><span class="p">)),</span> <span class="s2">&quot;rb&quot;</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Shelf.get_food_info"><a class="viewcode-back" href="../../api/index.html#pyfood.utils.Shelf.get_food_info">[docs]</a>    <span class="k">def</span> <span class="nf">get_food_info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food_name</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns food id, taxon and seasonality.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        food_name : str</span>
+<span class="sd">            Food name in self.lang_source</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ----------</span>
+<span class="sd">        food_name : str</span>
+<span class="sd">            Food name in self.lang_source</span>
+<span class="sd">        fid : float</span>
+<span class="sd">            Food id in self.lang_source </span>
+<span class="sd">        taxon : str</span>
+<span class="sd">            Food taxon (fruits: 001, vegetables: 002, ..., mushrooms: 005)</span>
+<span class="sd">        score : float</span>
+<span class="sd">            Food score in self.region and self.month_id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="s1">&#39;f2id&#39;</span><span class="p">][</span><span class="n">food_name</span><span class="p">]</span> <span class="c1"># ref id, for example: Reine Claude --&gt; Prune</span>
+        <span class="n">taxon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feats</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">fid</span><span class="p">)][</span><span class="s1">&#39;taxon&#39;</span><span class="p">]</span>
+        <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">seasonal_vector</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">fid</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">food_name</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">taxon</span><span class="p">,</span> <span class="n">score</span></div>
+
+<div class="viewcode-block" id="Shelf.text2food"><a class="viewcode-back" href="../../api/index.html#pyfood.utils.Shelf.text2food">[docs]</a>    <span class="k">def</span> <span class="nf">text2food</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food_name</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieves ingredient from vocabulary using `tdfidf` and `cosine_similarity`. Returns food id, taxon and seasonality.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        food_name : str</span>
+<span class="sd">            (Noisy) food name in self.lang_source</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ----------</span>
+<span class="sd">        food_name : str</span>
+<span class="sd">            Food name in self.lang_source</span>
+<span class="sd">        fid : float</span>
+<span class="sd">            Food id in self.lang_source </span>
+<span class="sd">        taxon : str</span>
+<span class="sd">            Food taxon (fruits: 001, vegetables: 002, ..., mushrooms: 005)</span>
+<span class="sd">        score : float</span>
+<span class="sd">            Food score in self.region and self.month_id</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">food_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="s1">&#39;f2id&#39;</span><span class="p">]:</span>
+            <span class="n">food_name</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">taxon</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_food_info</span><span class="p">(</span><span class="n">food_name</span><span class="o">=</span><span class="n">food_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">food_name</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">taxon</span><span class="p">,</span> <span class="n">score</span>
+
+        <span class="n">food_name</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote</span><span class="p">(</span><span class="n">food_name</span><span class="p">)</span> <span class="c1"># replace %xx escapes by their single-character equivalent (utf-8 encoding)</span>
+        <span class="n">food_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\(.*\)&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">food_name</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="c1"># remove parenthesis, lower case and strip string</span>
+        <span class="k">if</span> <span class="n">food_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="s1">&#39;f2id&#39;</span><span class="p">]:</span>
+            <span class="n">food_name</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">taxon</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_food_info</span><span class="p">(</span><span class="n">food_name</span><span class="o">=</span><span class="n">food_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">food_name</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">taxon</span><span class="p">,</span> <span class="n">score</span>
+
+        <span class="n">food_name_az</span> <span class="o">=</span> <span class="n">unidecode</span><span class="o">.</span><span class="n">unidecode</span><span class="p">(</span><span class="n">food_name</span><span class="p">)</span> <span class="c1"># convert unicode with accents to unaccented_string</span>
+        <span class="n">food_name_az</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;[^a-zA-Z]+&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">food_name_az</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="c1"># replace apostrophees, non alpha characters by spaces and strip string</span>
+        <span class="k">if</span> <span class="n">food_name_az</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="s1">&#39;f2id&#39;</span><span class="p">]:</span>
+            <span class="n">food_name</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">taxon</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_food_info</span><span class="p">(</span><span class="n">food_name</span><span class="o">=</span><span class="n">food_name_az</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">food_name</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">taxon</span><span class="p">,</span> <span class="n">score</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_tfidf</span><span class="p">()</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="n">str2ngrams</span><span class="p">(</span><span class="n">food_name</span><span class="p">)</span> <span class="o">+</span> <span class="n">str2ngrams</span><span class="p">(</span><span class="n">food_name_az</span><span class="p">)</span> <span class="c1"># list of ngrams</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">candidates</span><span class="p">))</span> <span class="c1"># remove duplicate ngrams</span>
+        <span class="n">penalty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">food_name</span><span class="p">)]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">])</span>
+        <span class="n">affinity</span> <span class="o">=</span> <span class="n">penalty</span><span class="o">*</span><span class="n">cosine_similarity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tfidf</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">candidates</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">ngrams</span><span class="p">,</span> <span class="n">dense_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># (len(candidates), n_ingredients)</span>
+        <span class="n">neighbors_id</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">affinity</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">affinity</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">neighbors_id</span><span class="p">)])</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">nearest_neighbor_id</span> <span class="o">=</span> <span class="n">neighbors_id</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+        <span class="n">nearest_neighbor_similarity</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">nearest_neighbor_similarity</span><span class="o">&gt;</span><span class="n">threshold</span><span class="p">:</span>
+            <span class="n">food_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapping</span><span class="p">[</span><span class="s1">&#39;id2f&#39;</span><span class="p">][</span><span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">nearest_neighbor_id</span><span class="p">))]</span>
+            <span class="n">food_name</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">taxon</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_food_info</span><span class="p">(</span><span class="n">food_name</span><span class="o">=</span><span class="n">food_name</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">food_name</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">taxon</span><span class="p">,</span> <span class="n">score</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">food_name</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="nf">convert2g</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">qty</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Converts a food id, quantity and unit in grams.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        fid : float</span>
+<span class="sd">            Food id</span>
+<span class="sd">        qty : float</span>
+<span class="sd">            Quantity</span>
+<span class="sd">        unit : str</span>
+<span class="sd">            Unit</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ----------</span>
+<span class="sd">        weight: float</span>
+<span class="sd">            Quantity in grams</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">unit</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">qty</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">feats</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">fid</span><span class="p">)][</span><span class="s1">&#39;default_weight&#39;</span><span class="p">]</span> <span class="c1"># convert to g</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">units</span><span class="p">[</span><span class="s1">&#39;masse&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">qty</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;masse&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">units</span><span class="p">[</span><span class="s1">&#39;volume&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">qty</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;volume&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">])</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">feats</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">fid</span><span class="p">)][</span><span class="s1">&#39;density&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">unit</span> <span class="ow">in</span> <span class="n">units</span><span class="p">[</span><span class="s1">&#39;misc&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">qty</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">units</span><span class="p">[</span><span class="s1">&#39;misc&#39;</span><span class="p">][</span><span class="n">unit</span><span class="p">])</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">feats</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">fid</span><span class="p">)][</span><span class="s1">&#39;default_weight&#39;</span><span class="p">]</span> 
+        <span class="k">return</span> <span class="n">qty</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">feats</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">fid</span><span class="p">)][</span><span class="s1">&#39;default_weight&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">NER</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food_list</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">qty_list</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">unit_list</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">lang_dest</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">filter_HS</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; Named Entity Recognition on a food (+ optionally quantity and unit) list.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        food_list : list</span>
+<span class="sd">            (Noisy) list of food name in self.lang_source</span>
+<span class="sd">        qty_list : list</span>
+<span class="sd">            List of quantities</span>
+<span class="sd">        unit_list : list</span>
+<span class="sd">            List of units</span>
+<span class="sd">        lang_dest : str</span>
+<span class="sd">            Target language (default self.lang_source)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        ----------</span>
+<span class="sd">        recipe_vector : np.array(self.n_ingredients,1)</span>
+<span class="sd">            Vectorized basket of food</span>
+<span class="sd">        foodnames : list</span>
+<span class="sd">            Denoised food list in self.lang_source</span>
+<span class="sd">        qties : list</span>
+<span class="sd">            List of quantities (str)</span>
+<span class="sd">        units : list</span>
+<span class="sd">            List of units (str)</span>
+<span class="sd">        taxons : list</span>
+<span class="sd">            List of taxons</span>
+<span class="sd">        HS : list</span>
+<span class="sd">            List of food out of season</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">lang_dest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lang_dest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang_source</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">lang_dest</span> <span class="o">=</span> <span class="n">lang_dest</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">qty_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">qty_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;100&#39;</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">food_list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">unit_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">unit_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">food_list</span><span class="p">)</span>
+
+        <span class="n">recipe_vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">n_ingredients</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># basket of food (n_ingredients,1)</span>
+        <span class="n">foodnames</span><span class="p">,</span> <span class="n">qties</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">taxons</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span> <span class="c1"># extracted entity (length &lt; food_list)</span>
+        <span class="n">HS</span><span class="p">,</span> <span class="n">HS_id</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span> <span class="c1"># hors saison</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="n">food_</span><span class="p">,</span><span class="n">qty_</span><span class="p">,</span><span class="n">unit_</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">food_list</span><span class="p">,</span><span class="n">qty_list</span><span class="p">,</span><span class="n">unit_list</span><span class="p">):</span> <span class="c1"># ingredients</span>
+            <span class="n">food_</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">taxon</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">text2food</span><span class="p">(</span><span class="n">food_name</span><span class="o">=</span><span class="n">food_</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="c1"># food_ is in food vocab</span>
+                <span class="k">if</span> <span class="n">lang_dest</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lang_source</span><span class="p">:</span>
+                    <span class="n">food_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feats</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">fid</span><span class="p">)][</span><span class="n">lang_dest</span><span class="p">]</span> <span class="c1"># translate food name</span>
+                <span class="n">qty_</span> <span class="o">=</span> <span class="n">str2float</span><span class="p">(</span><span class="n">qty_</span><span class="p">)</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert2g</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">qty_</span><span class="p">,</span> <span class="n">unit_</span><span class="p">)</span> <span class="c1"># convert to g</span>
+                <span class="n">recipe_vector</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">fid</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">weight</span> <span class="c1"># quantity in g</span>
+                <span class="k">if</span> <span class="n">filter_HS</span> <span class="ow">and</span> <span class="p">(</span><span class="n">score</span><span class="o">&lt;</span><span class="mf">0.5</span> <span class="ow">or</span> <span class="n">taxon</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;21&#39;</span><span class="p">)):</span> <span class="c1"># seasonality threshold below 0.5 or non vege ingredient (i.e. fish, meat, egg, seafood)</span>
+                    <span class="n">HS</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">food_</span><span class="p">)</span>
+                    <span class="n">HS_id</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">qties</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qty_</span><span class="p">)</span>
+                    <span class="n">units</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unit_</span><span class="p">)</span>
+                    <span class="n">taxons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">taxon</span><span class="p">)</span>
+                    <span class="n">foodnames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">food_</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">recipe_vector</span><span class="p">,</span> <span class="n">foodnames</span><span class="p">,</span> <span class="n">qties</span><span class="p">,</span> <span class="n">units</span><span class="p">,</span> <span class="n">taxons</span><span class="p">,</span> <span class="n">HS</span><span class="p">,</span> <span class="n">HS_id</span>
+
+<div class="viewcode-block" id="Shelf.process_ingredients"><a class="viewcode-back" href="../../api/index.html#pyfood.utils.Shelf.process_ingredients">[docs]</a>    <span class="k">def</span> <span class="nf">process_ingredients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">food_list</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">qty_list</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">unit_list</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">lang_dest</span><span class="p">:</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">revisit</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">infer_nutri</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">serving</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Labels a list of ingredients, e.g., from a recipe or a basket of food, and saves attributes / labels in self.tags</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        food_list : list</span>
+<span class="sd">            List of food name in self.lang_source</span>
+<span class="sd">        qty_list : list</span>
+<span class="sd">            List of quantities or None</span>
+<span class="sd">        unit_list : list</span>
+<span class="sd">            List of units or None</span>
+<span class="sd">        lang_dest : str</span>
+<span class="sd">            Target language, default self.lang_source</span>
+<span class="sd">        revisit : bool</span>
+<span class="sd">            Infer Recipe2BetterRecipe, default False</span>
+<span class="sd">        infer_nutri : bool</span>
+<span class="sd">            Infer nutrition scores, default False</span>
+<span class="sd">        serving : int</span>
+<span class="sd">            Number of portions, default 1. </span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        tags: dict</span>
+<span class="sd">            Extracted ingredients (ingredients_by_taxon, HS, revisited), predicted nutrition (allergies, energy, macro, minerals, vitamines) and labels (vege, vegan, seasonality)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># read recipe</span>
+        <span class="n">my_recipe_vector</span><span class="p">,</span> <span class="n">foodnames</span><span class="p">,</span> <span class="n">qties</span><span class="p">,</span> <span class="n">unit_list</span><span class="p">,</span> <span class="n">taxons</span><span class="p">,</span> <span class="n">HS</span><span class="p">,</span> <span class="n">HS_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NER</span><span class="p">(</span><span class="n">food_list</span><span class="o">=</span><span class="n">food_list</span><span class="p">,</span> <span class="n">qty_list</span><span class="o">=</span><span class="n">qty_list</span><span class="p">,</span> <span class="n">unit_list</span><span class="o">=</span><span class="n">unit_list</span><span class="p">,</span> <span class="n">lang_dest</span><span class="o">=</span><span class="n">lang_dest</span><span class="p">)</span> <span class="c1"># map ingredients to basket of food</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># init tags</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;ingredients&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lists2object</span><span class="p">(</span><span class="n">foodnames</span><span class="p">,</span> <span class="n">qties</span><span class="p">,</span> <span class="n">unit_list</span><span class="p">,</span> <span class="n">taxons</span><span class="p">)</span> <span class="c1"># seasonal and vege ingedients</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;HS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">HS</span> <span class="c1"># rest of ingredients</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;ingredients_by_taxon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1"># dict of list, e.g. 001: [pomme, poire], 101: [sel]</span>
+        <span class="k">for</span> <span class="n">foodname</span><span class="p">,</span> <span class="n">taxon</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">foodnames</span><span class="p">,</span> <span class="n">taxons</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">taxon</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;ingredients_by_taxon&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;ingredients_by_taxon&#39;</span><span class="p">][</span><span class="n">taxon</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">foodname</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;ingredients_by_taxon&#39;</span><span class="p">][</span><span class="n">taxon</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">foodname</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;ingredients_by_taxon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;ingredients_by_taxon&#39;</span><span class="p">][</span><span class="n">taxon</span><span class="p">]</span> <span class="k">for</span> <span class="n">taxon</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">taxons</span><span class="p">))]</span> <span class="c1"># list of list, e.g. [ [pomme, poire], [sel] ]</span>
+
+        <span class="c1"># infer seasonality</span>
+        <span class="k">if</span> <span class="n">my_recipe_vector</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;vegan&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;vege&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;seasonality&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;region&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;best_now&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">}}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;revisited&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="n">infer_nutri</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;nutri&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Allergies&#39;</span><span class="p">:{},</span> <span class="s1">&#39;Energy&#39;</span><span class="p">:{},</span> <span class="s1">&#39;Macro&#39;</span><span class="p">:{},</span> <span class="s1">&#39;Minerals&#39;</span><span class="p">:{},</span> <span class="s1">&#39;Vitamines&#39;</span><span class="p">:{}}</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">my_recipe_vector</span> <span class="o">/=</span> <span class="n">my_recipe_vector</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="c1"># normalize ingredients (proportions) for seasonality</span>
+            <span class="n">my_seasons_vector</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seasonal_matrix</span> <span class="o">*</span> <span class="n">csr_matrix</span><span class="p">(</span><span class="n">my_recipe_vector</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span> <span class="c1"># infer seasonality from seasonal ingredients: (n_seasons,n_ingredients) * (n_ingredients,1) = (n_seasons,1)</span>
+            <span class="n">seasonality</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">region</span><span class="p">,</span> <span class="s1">&#39;score&#39;</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">my_seasons_vector</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">month_id</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="s1">&#39;best_now&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">HS</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">}</span>
+
+            <span class="c1"># infer labels</span>
+            <span class="n">is_vege</span> <span class="o">=</span> <span class="nb">len</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">HS_id</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feats</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">fid</span><span class="p">)][</span><span class="s1">&#39;taxon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;21&#39;</span><span class="p">)])</span><span class="o">==</span><span class="mi">0</span> <span class="c1"># Vegetarian label</span>
+            <span class="n">is_vegan</span> <span class="o">=</span> <span class="n">is_vege</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">([</span><span class="mi">1</span> <span class="k">for</span> <span class="n">taxon</span> <span class="ow">in</span> <span class="n">taxons</span> <span class="k">if</span> <span class="n">taxon</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)])</span><span class="o">==</span><span class="mi">0</span> <span class="c1"># Vegan label (check no diary and cheese)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;vegan&#39;</span><span class="p">:</span><span class="n">is_vegan</span><span class="p">,</span> <span class="s1">&#39;vege&#39;</span><span class="p">:</span><span class="n">is_vege</span><span class="p">,</span> <span class="s1">&#39;seasonality&#39;</span><span class="p">:</span><span class="n">seasonality</span><span class="p">}</span>
+
+            <span class="c1"># revisit recipe</span>
+            <span class="n">revisited</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1">#if revisit==True and (self.lang_source==lang_dest or lang_dest==None):</span>
+            <span class="c1">#    # revisited = self.sample(my_recipe_vector, nsamples=len(HS)) #####</span>
+            <span class="c1">#    revisited = []</span>
+            <span class="c1">#    for hs, hs_id in zip(HS, HS_id): # taxon constraint</span>
+            <span class="c1">#        hs_taxon = self.feats[str(hs_id)][&#39;taxon&#39;]</span>
+            <span class="c1">#        ideas = self.harmonize(food=hs, nsamples=4)</span>
+            <span class="c1">#        for idea in ideas:</span>
+            <span class="c1">#            revisited.append(idea)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;revisited&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">revisited</span><span class="p">))</span>
+
+            <span class="c1">##### Infer nutriscores [HEALTH]</span>
+            <span class="c1"># infer nutriscores and VNR</span>
+            <span class="k">if</span> <span class="n">infer_nutri</span><span class="o">==</span><span class="kc">True</span><span class="p">:</span>
+                <span class="n">nutrition</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Energy&#39;</span><span class="p">:{},</span> <span class="s1">&#39;Macro&#39;</span><span class="p">:{},</span> <span class="s1">&#39;Minerals&#39;</span><span class="p">:{},</span> <span class="s1">&#39;Vitamins&#39;</span><span class="p">:{}}</span>
+                <span class="n">nutriscores</span> <span class="o">=</span> <span class="n">load_npz</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="s1">&#39;assets&#39;</span><span class="p">,</span><span class="s1">&#39;nutri&#39;</span><span class="p">,</span><span class="s1">&#39;sparse_nutriscores.npz&#39;</span><span class="p">))</span> <span class="c1"># load nutriscores matrix</span>
+                <span class="n">my_nutri_vector</span> <span class="o">=</span> <span class="p">(</span><span class="n">nutriscores</span> <span class="o">*</span> <span class="n">csr_matrix</span><span class="p">(</span><span class="n">my_recipe_vector</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+                <span class="n">my_nutri_vector</span> <span class="o">=</span> <span class="n">my_nutri_vector</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">serving</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Energy&#39;</span><span class="p">,</span> <span class="s1">&#39;Macro&#39;</span><span class="p">,</span> <span class="s1">&#39;Minerals&#39;</span><span class="p">,</span> <span class="s1">&#39;Vitamins&#39;</span><span class="p">]:</span>
+                    <span class="k">for</span> <span class="n">nutri_name</span><span class="p">,</span> <span class="n">nutri_id</span> <span class="ow">in</span> <span class="n">nutrimap</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="n">composcore</span> <span class="o">=</span> <span class="mi">100</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">my_nutri_vector</span><span class="p">[</span><span class="n">nutri_id</span><span class="p">])</span><span class="o">/</span><span class="n">vnr</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">nutri_name</span><span class="p">]</span> <span class="c1"># infer kCal (energy), macro scores, minerals scores and vitamines scores (% VNR) + Allergies (0 ou 1)</span>
+                        <span class="k">if</span> <span class="n">composcore</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+                            <span class="n">nutrition</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">nutri_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">composcore</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="s1">&#39;nutri&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nutrition</span>
+
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Local Seasonal
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

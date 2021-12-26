@@ -1,0 +1,253 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quickstart &mdash; Pyfood 0.0.1 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pyfood Assets" href="assets.html" />
+    <link rel="prev" title="Pyfood documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Pyfood
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="assets.html">Pyfood Assets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Example gallery:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">🌰 Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Pyfood</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Quickstart</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/quickstart.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quickstart">
+<h1>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Pyfood is a simple Python package to process food, in different languages</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install pyfood
+</pre></div>
+</div>
+<p>will install Pyfood alongside all the other libraries that you will need to run it.</p>
+</div>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<p>At the core of Pyfood is the concept of a <code class="docutils literal notranslate"><span class="pre">shelf</span></code> embedded in a given <code class="docutils literal notranslate"><span class="pre">region</span></code>, a certain <code class="docutils literal notranslate"><span class="pre">month_id</span></code> and optionally a <code class="docutils literal notranslate"><span class="pre">source</span></code> language.
+You can load a shelf embedded in France in January with the following Python snippet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyfood.utils</span> <span class="kn">import</span> <span class="n">Shelf</span>
+<span class="n">shelf</span> <span class="o">=</span> <span class="n">Shelf</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="s1">&#39;France&#39;</span><span class="p">,</span> <span class="n">month_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pyfood currently works with the following regions: <strong>France</strong> 🇫🇷, <strong>Italy</strong> 🇮🇹, <strong>Spain</strong> 🇪🇸, <strong>Portugal</strong> 🇵🇹, <strong>Germany</strong> 🇩🇪, <strong>EU</strong> 🇪🇺 (Europe, default), <strong>United Kingdom</strong> 🇬🇧, <strong>Canada</strong> 🇨🇦, <strong>Japan</strong> 🇯🇵, <strong>Israel</strong> 🇮🇱 and <strong>Senegal</strong> 🇸🇳.
+Pyfood can help automatically extract and label a list of ingredients, e.g., from a basket of food, a recipe, a menu, a cookbook or a website, with attributes/categories (e.g., fruits, vegetables) and labels (e.g., vegetarian, vegan, nutrition, seasonality), using a few lines of code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">shelf</span><span class="o">.</span><span class="n">process_ingredients</span><span class="p">([</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span><span class="s1">&#39;kiwi&#39;</span><span class="p">,</span><span class="s1">&#39;sugar&#39;</span><span class="p">])</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;labels&#39;</span><span class="p">]</span> <span class="c1"># vegetarian, vegan, nutrition, seasonality</span>
+</pre></div>
+</div>
+<p>Pyfood comes with a vocabulary of more than 600 ingredients and synonymes, in multiple languages, and makes it easy to work with recipes in different languages or translate ingredients from a language to another one.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">shelf</span><span class="o">.</span><span class="n">process_ingredients</span><span class="p">([</span><span class="s1">&#39;apple&#39;</span><span class="p">,</span><span class="s1">&#39;kiwi&#39;</span><span class="p">,</span><span class="s1">&#39;sugar&#39;</span><span class="p">],</span> <span class="n">lang_dest</span><span class="o">=</span><span class="s1">&#39;FR&#39;</span><span class="p">)</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;food_list&#39;</span><span class="p">]</span> <span class="c1"># pomme, kiwi, sucre</span>
+</pre></div>
+</div>
+<p>Pyfood currently supports the following languages <strong>EN</strong> (English), <strong>FR</strong> (French), <strong>ES</strong> (Spanish), <strong>IT</strong> (Italian), <strong>DE</strong> (German), <strong>PT</strong> (Portuguese) and <strong>UN</strong> (Universal, default). Finally, Pyfood can also be used to simply query what fruits or vegetables are in season, which depends on the <code class="docutils literal notranslate"><span class="pre">region</span></code> and <code class="docutils literal notranslate"><span class="pre">month_id</span></code> selected.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fruits_in_season</span> <span class="o">=</span> <span class="n">shelf</span><span class="o">.</span><span class="n">get_seasonal_food</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;001&#39;</span><span class="p">)</span>
+<span class="n">vegetables_in_season</span> <span class="o">=</span> <span class="n">shelf</span><span class="o">.</span><span class="n">get_seasonal_food</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">&#39;002&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="assets.html" class="btn btn-neutral float-right" title="Pyfood Assets" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Pyfood documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Local Seasonal
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

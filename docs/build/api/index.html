@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pyfood API &mdash; Pyfood 0.0.1 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="License" href="../license.html" />
+    <link rel="prev" title="Pyfood Assets" href="../assets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Pyfood
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../assets.html">Pyfood Assets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyfood-shelf">Pyfood shelf</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute.html">Contribute</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Example gallery:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">🌰 Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Pyfood</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Pyfood API</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/api/index.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pyfood-api">
+<h1>Pyfood API<a class="headerlink" href="#pyfood-api" title="Permalink to this headline">¶</a></h1>
+<p>Pyfood is a simple Python package to process food, in different languages. At the core of Pyfood is the concept of a <code class="docutils literal notranslate"><span class="pre">shelf</span></code> embedded in a given <code class="docutils literal notranslate"><span class="pre">region</span></code>, a certain <code class="docutils literal notranslate"><span class="pre">month_id</span></code> and optionally a <code class="docutils literal notranslate"><span class="pre">source</span></code> language.
+You can load a shelf embedded in France in January with the following Python snippet:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyfood.utils</span> <span class="kn">import</span> <span class="n">Shelf</span>
+<span class="n">shelf</span> <span class="o">=</span> <span class="n">Shelf</span><span class="p">(</span><span class="n">region</span><span class="o">=</span><span class="s1">&#39;France&#39;</span><span class="p">,</span> <span class="n">month_id</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pyfood currently works with the following regions: <strong>France</strong> 🇫🇷, <strong>Italy</strong> 🇮🇹, <strong>Spain</strong> 🇪🇸, <strong>Portugal</strong> 🇵🇹, <strong>Germany</strong> 🇩🇪, <strong>EU</strong> 🇪🇺 (Europe, default), <strong>United Kingdom</strong> 🇬🇧, <strong>Canada</strong> 🇨🇦, <strong>Japan</strong> 🇯🇵, <strong>Israel</strong> 🇮🇱 and <strong>Senegal</strong> 🇸🇳. It supports the following languages <strong>EN</strong> (English), <strong>FR</strong> (French), <strong>ES</strong> (Spanish), <strong>IT</strong> (Italian), <strong>DE</strong> (German), <strong>PT</strong> (Portuguese) and <strong>UN</strong> (Universal, default)</p>
+<div class="section" id="pyfood-shelf">
+<h2>Pyfood shelf<a class="headerlink" href="#pyfood-shelf" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="pyfood.utils.Shelf">
+<em class="property">class </em><code class="sig-prename descclassname">pyfood.utils.</code><code class="sig-name descname">Shelf</code><span class="sig-paren">(</span><em class="sig-param">region: str = 'EU'</em>, <em class="sig-param">lang_source: str = 'un'</em>, <em class="sig-param">month_id: int = 0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyfood/utils.html#Shelf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfood.utils.Shelf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pyfood shelf embedded in a given region, month_id and optionally source language</p>
+<dl class="method">
+<dt id="pyfood.utils.Shelf.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param">region: str = 'EU'</em>, <em class="sig-param">lang_source: str = 'un'</em>, <em class="sig-param">month_id: int = 0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyfood/utils.html#Shelf.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfood.utils.Shelf.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiates a shelf from a context (region, lang_source, month_id).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyfood.utils.Shelf.get_food_info">
+<code class="sig-name descname">get_food_info</code><span class="sig-paren">(</span><em class="sig-param">food_name: str</em><span class="sig-paren">)</span> &#x2192; Tuple<a class="reference internal" href="../_modules/pyfood/utils.html#Shelf.get_food_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfood.utils.Shelf.get_food_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns food id, taxon and seasonality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>food_name</strong> (<em>str</em>) – Food name in self.lang_source</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>food_name</strong> (<em>str</em>) – Food name in self.lang_source</p></li>
+<li><p><strong>fid</strong> (<em>float</em>) – Food id in self.lang_source</p></li>
+<li><p><strong>taxon</strong> (<em>str</em>) – Food taxon (fruits: 001, vegetables: 002, …, mushrooms: 005)</p></li>
+<li><p><strong>score</strong> (<em>float</em>) – Food score in self.region and self.month_id</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyfood.utils.Shelf.get_seasonal_food">
+<code class="sig-name descname">get_seasonal_food</code><span class="sig-paren">(</span><em class="sig-param">key: str = '001'</em><span class="sig-paren">)</span> &#x2192; List[str]<a class="reference internal" href="../_modules/pyfood/utils.html#Shelf.get_seasonal_food"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfood.utils.Shelf.get_seasonal_food" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns what food is in season</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>key</strong> (<em>str</em>) – taxon code (fruits: 001, vegetables: 002, …, mushrooms: 005)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>seasonal_food: Food in seasons in self.region, self.month_id and self.lang_source</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyfood.utils.Shelf.process_ingredients">
+<code class="sig-name descname">process_ingredients</code><span class="sig-paren">(</span><em class="sig-param">food_list: List[str], qty_list: Optional[List[str]], unit_list: Optional[List[str]], lang_dest: Optional[str], revisit: bool = False, infer_nutri: bool = False, serving: int = 1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyfood/utils.html#Shelf.process_ingredients"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfood.utils.Shelf.process_ingredients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Labels a list of ingredients, e.g., from a recipe or a basket of food, and saves attributes / labels in self.tags</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>food_list</strong> (<em>list</em>) – List of food name in self.lang_source</p></li>
+<li><p><strong>qty_list</strong> (<em>list</em>) – List of quantities or None</p></li>
+<li><p><strong>unit_list</strong> (<em>list</em>) – List of units or None</p></li>
+<li><p><strong>lang_dest</strong> (<em>str</em>) – Target language, default self.lang_source</p></li>
+<li><p><strong>revisit</strong> (<em>bool</em>) – Infer Recipe2BetterRecipe, default False</p></li>
+<li><p><strong>infer_nutri</strong> (<em>bool</em>) – Infer nutrition scores, default False</p></li>
+<li><p><strong>serving</strong> (<em>int</em>) – Number of portions, default 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>tags</strong> – Extracted ingredients (ingredients_by_taxon, HS, revisited), predicted nutrition (allergies, energy, macro, minerals, vitamines) and labels (vege, vegan, seasonality)</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="pyfood.utils.Shelf.text2food">
+<code class="sig-name descname">text2food</code><span class="sig-paren">(</span><em class="sig-param">food_name: str = 'apple'</em>, <em class="sig-param">threshold: float = 0.0</em><span class="sig-paren">)</span> &#x2192; Tuple<a class="reference internal" href="../_modules/pyfood/utils.html#Shelf.text2food"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pyfood.utils.Shelf.text2food" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieves ingredient from vocabulary using <cite>tdfidf</cite> and <cite>cosine_similarity</cite>. Returns food id, taxon and seasonality.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>food_name</strong> (<em>str</em>) – (Noisy) food name in self.lang_source</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>food_name</strong> (<em>str</em>) – Food name in self.lang_source</p></li>
+<li><p><strong>fid</strong> (<em>float</em>) – Food id in self.lang_source</p></li>
+<li><p><strong>taxon</strong> (<em>str</em>) – Food taxon (fruits: 001, vegetables: 002, …, mushrooms: 005)</p></li>
+<li><p><strong>score</strong> (<em>float</em>) – Food score in self.region and self.month_id</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../license.html" class="btn btn-neutral float-right" title="License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../assets.html" class="btn btn-neutral float-left" title="Pyfood Assets" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Local Seasonal
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,372 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Pyfood Assets &mdash; Pyfood 0.0.1 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Pyfood API" href="api/index.html" />
+    <link rel="prev" title="Quickstart" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Pyfood
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pyfood Assets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#vocabulary">Vocabulary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#nutrition">Nutrition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#seasonality">Seasonality</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribute</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Example gallery:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">🌰 Examples</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Pyfood</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Pyfood Assets</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/assets.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pyfood-assets">
+<h1>Pyfood Assets<a class="headerlink" href="#pyfood-assets" title="Permalink to this headline">¶</a></h1>
+<p>Food is a universal language and Pyfood is a simple Python package to process food. It comes with assets described below to automatically extract, tag or translate baskets of food, recipes or cookbooks with labels, e.g. vegetarian, vegan, nutrition or seasonality.</p>
+<p>Important note: Pyfood is still work in progress. Therefore, some fields below might be empty and need further work. You’re welcome to <a class="reference external" href="https://github.com/MichelDeudon/pyfood/issues">open an issue on Github</a> or reach out directly to the project contributors for any question, comment or feedback. Thank you! 🙏</p>
+<div class="section" id="vocabulary">
+<h2>Vocabulary<a class="headerlink" href="#vocabulary" title="Permalink to this headline">¶</a></h2>
+<p>Similar to English, French or Music, <a class="reference external" href="hhttps://web.stanford.edu/~jurafsky/thelanguageoffood.html">food as a language</a> comes with its own alphabet, vocabulary and grammar.
+The grammar deals with composition or how to make a soup out of ingredients, step by step. It’s pretty well accessible and understood.
+The vocabulary is about the ingredients themselves. What is a strawberry? Where and when does it grow? What benefits does it have?</p>
+<p>Each ingredient in Pyfood’s vocabulary is unique and has its own attributes (names, synonymes, nutrition, seasonality, etc) which varies by <code class="docutils literal notranslate"><span class="pre">region</span></code> and <code class="docutils literal notranslate"><span class="pre">month_id</span></code>.
+See below for an example in <code class="docutils literal notranslate"><span class="pre">assets/vocab/feats.json</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;0.0&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;taxon&quot;</span><span class="p">:</span> <span class="s2">&quot;001&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;default_weight&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;density&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;allergen&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://images.pexels.com/photos/...&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;CIQUAL_ref&quot;</span><span class="p">:</span> <span class="s2">&quot;Abricot, denoyaute, cru&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;kCal&quot;</span><span class="p">:</span> <span class="mf">42.6</span><span class="p">,</span>
+    <span class="s2">&quot;macro&quot;</span><span class="p">:</span> <span class="s2">&quot;Protein:1.01, Glucides:7.14, AcidesGrasSatures:0.024, AcidesOrganiques:1.4, Sucre:6.57, Fibres:1.8, Lipides:0.35&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;minerals&quot;</span><span class="p">:</span> <span class="s2">&quot;Ca:16.1, Cu:0.082, Fe:0.19, I:0.37, Mg:9.94, Mn:0.071, P:22.5, K:229, Se:10, Na:1.11, Zn:0.14&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vitamins&quot;</span><span class="p">:</span> <span class="s2">&quot;Beta:1090, E:0.89, C:10, B1:0.03, B2:0.04, B3:0.6, B5:0.24, B6:0.054, B9:9&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;un&quot;</span><span class="p">:</span> <span class="s2">&quot;abricot&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;fr&quot;</span><span class="p">:</span> <span class="s2">&quot;abricot&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;es&quot;</span><span class="p">:</span> <span class="s2">&quot;albaricoque&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;en&quot;</span><span class="p">:</span> <span class="s2">&quot;apricot&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;it&quot;</span><span class="p">:</span> <span class="s2">&quot;albicocca&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;pt&quot;</span><span class="p">:</span> <span class="s2">&quot;alperce&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;de&quot;</span><span class="p">:</span> <span class="s2">&quot;aprikose&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;zh&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u674f</span><span class="s2">&quot;</span><span class="p">,</span>
+<span class="p">},</span>
+</pre></div>
+</div>
+<p>Taxon is a code to identify which family an ingredient belongs to and can be used for example to predict if a recipe or basket of food is vegan or vegetarian.</p>
+<table class="colwidths-given docutils align-default" id="id2">
+<caption><span class="caption-text">Taxon used</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>0xx (seasonal)</p></th>
+<th class="head"><p>1xx (non seasonal)</p></th>
+<th class="head"><p>2xx (non vegan)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>001: <code class="docutils literal notranslate"><span class="pre">Fruits</span></code></p></td>
+<td><p>101: <code class="docutils literal notranslate"><span class="pre">Spice</span></code></p></td>
+<td><p>201: <code class="docutils literal notranslate"><span class="pre">Diary</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>002: <code class="docutils literal notranslate"><span class="pre">Vegetables</span></code></p></td>
+<td><p>102: <code class="docutils literal notranslate"><span class="pre">Helpers</span></code></p></td>
+<td><p>202: <code class="docutils literal notranslate"><span class="pre">Cheese</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>003: <code class="docutils literal notranslate"><span class="pre">Leguminous</span></code></p></td>
+<td><p>103: <code class="docutils literal notranslate"><span class="pre">Cereals</span></code></p></td>
+<td><p>203: <code class="docutils literal notranslate"><span class="pre">Eggs</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>004: <code class="docutils literal notranslate"><span class="pre">Mushrooms</span></code></p></td>
+<td><p>104: <code class="docutils literal notranslate"><span class="pre">Pasta</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>005: <code class="docutils literal notranslate"><span class="pre">Nuts</span></code></p></td>
+<td><p>105: <code class="docutils literal notranslate"><span class="pre">Bread</span></code></p></td>
+<td><p>211: <code class="docutils literal notranslate"><span class="pre">Fish</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>006: <code class="docutils literal notranslate"><span class="pre">Algae</span></code></p></td>
+<td><p>106: <code class="docutils literal notranslate"><span class="pre">Plant</span> <span class="pre">based</span> <span class="pre">diary</span></code></p></td>
+<td><p>212: <code class="docutils literal notranslate"><span class="pre">Poultry</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>007: <code class="docutils literal notranslate"><span class="pre">Plants</span></code></p></td>
+<td><p>107: <code class="docutils literal notranslate"><span class="pre">Sugary</span></code></p></td>
+<td><p>213: <code class="docutils literal notranslate"><span class="pre">Sea</span> <span class="pre">food</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>008: <code class="docutils literal notranslate"><span class="pre">Herbs</span></code></p></td>
+<td><p>110: <code class="docutils literal notranslate"><span class="pre">Alcohol</span></code></p></td>
+<td><p>214: <code class="docutils literal notranslate"><span class="pre">Meat</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="nutrition">
+<h2>Nutrition<a class="headerlink" href="#nutrition" title="Permalink to this headline">¶</a></h2>
+<p>More than 90% of Pyfood ingredients are mapped to a nutritional database <a class="reference external" href="https://ciqual.anses.fr/">CIQUAL ANSES</a> which contains the following information for each ingredient: <code class="docutils literal notranslate"><span class="pre">kCal</span></code>, <code class="docutils literal notranslate"><span class="pre">macro</span></code>, <code class="docutils literal notranslate"><span class="pre">minerals</span></code>, <code class="docutils literal notranslate"><span class="pre">vitamins</span></code>. In addition, we have added an attribute <code class="docutils literal notranslate"><span class="pre">allergen</span></code> for each ingredient and recommended nutritional values in <code class="docutils literal notranslate"><span class="pre">assets/nutri/vnr.json</span></code>.</p>
+<table class="colwidths-given docutils align-default" id="id3">
+<caption><span class="caption-text">Details about the macro, minerals and vitamins subfields</span><a class="headerlink" href="#id3" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>macro</p></th>
+<th class="head"><p>minerals</p></th>
+<th class="head"><p>vitamins</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Protein</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Ca</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">A</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Lipides</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Cu</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">B1</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">AcidesGrasSatures</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Fe</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">B2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">AcidesOrganiques</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">I</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">B3</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Glucides</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Mg</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">B5</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">Sucre</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Mn</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">B6</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">Fibres</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">P</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">B9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">K</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">C</span></code></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Se</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">E</span></code></p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Na</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Beta</span></code></p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Zn</span></code></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="seasonality">
+<h2>Seasonality<a class="headerlink" href="#seasonality" title="Permalink to this headline">¶</a></h2>
+<p>What ingredient is in season (cf taxon code <strong>0xx</strong>) is written in text files under <code class="docutils literal notranslate"><span class="pre">assets/seasons/input/</span></code> (12 rows per <code class="docutils literal notranslate"><span class="pre">region</span></code>, each corresponding to a <code class="docutils literal notranslate"><span class="pre">month_id</span></code>)
+This information is saved as sparse matrices for efficient storage and calculations.</p>
+<p>To add or modify information for a given <code class="docutils literal notranslate"><span class="pre">region</span></code>, please <a class="reference external" href="https://github.com/MichelDeudon/pyfood/issues">open an issue on Github</a> or reach out directly to the project contributors. Thank you! 🙏</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="api/index.html" class="btn btn-neutral float-right" title="Pyfood API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="Quickstart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2021, Local Seasonal
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
