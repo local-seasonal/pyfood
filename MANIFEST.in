@@ -1,0 +1,4 @@
+graft pyfood/assets/nutri
+graft pyfood/assets/seasons
+graft pyfood/assets/vocab
+global-exclude *.pyc
