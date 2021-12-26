@@ -1,0 +1,12 @@
+apple, clementine, lemon, orange, pear,  pomegranate, beet,  brussels sprout, celery, celeriac, kale, leek, mushroom, parsnip, potato, rhubarb, shallots, rutabaga, turnip
+apple, clementine, lemon, orange, pear,  pomegranate,  brussels sprout, cauliflower, celeriac, kale, leek, mushroom, parsnip, potato, rhubarb, shallots, rutabaga, turnip
+lemon, orange,  pomegranate, cauliflower, celeriac, leek, red bell pepper, rhubarb, shallots, spinach, scallion
+apricot, asparagus, cauliflower, red bell pepper, rhubarb, spinach, scallion
+apricot, cherry, asparagus, eggplant, carrot, pea, red bell pepper, rhubarb, rocket, scallion, cress
+apricot, blueberry, cherry,  raspberry, strawberry, tomato, artichoke, asparagus, eggplant, carrot, zucchini, fennel, pak choi, pea, red bell pepper, rocket, spinach, scallion, turnip, cress
+apricot, blackberry, blueberry, cherry, melon, peach,  raspberry, strawberry, tomato, artichoke, asparagus, eggplant, beet, broccoli, carrot, zucchini, cucumber, fennel, pak choi, pea, red bell pepper, potato, rocket, scallion, turnip, cress
+apricot, blackberry, blueberry, cherry, melon, nectarine, peach,  raspberry, strawberry, tomato, artichoke, eggplant, beet, broccoli, carrot, celery, zucchini, cucumber, fennel, pak choi, pea, red bell pepper, potato, rocket, cress
+apple, apricot, blackberry, blueberry, grape, fig, melon, nectarine, peach, pear, plum,  raspberry, tomato, artichoke, eggplant, beet, broccoli, butternut squash, carrot, celery, celeriac, zucchini, cucumber, fennel, kale, leek, pak choi, pea, red bell pepper, potato, pumpkin, rocket, cress
+apple, blackberry, cranberry, grape, fig, melon, nectarine, pear, plum, tomato, artichoke, eggplant, beet, broccoli, butternut squash, carrot, celery, celeriac, zucchini, fennel, kale, leek, mushroom, parsnip, pea, red bell pepper, potato, pumpkin, rocket, shallots, rutabaga, turnip, cress
+apple, clementine, cranberry, fig, pear, artichoke, beet,  brussels sprout, butternut squash, celery, celeriac, kale, leek, mushroom, parsnip, potato, pumpkin, shallots, rutabaga, turnip, cress
+apple, clementine, cranberry, pear,  pomegranate, beet,  brussels sprout, cauliflower, celery, celeriac, kale, leek, mushroom, parsnip, potato, pumpkin, shallots, rutabaga, turnip

@@ -1,0 +1,12 @@
+strawberry, apple, kiwi, broccoli, cauliflower, celery, daikon, spinach, carrot
+strawberry, apple, kiwi, broccoli, cauliflower, celery, daikon, spinach, carrot
+strawberry, apple, kiwi, shiitake, potato
+strawberry, apple, kiwi, shiitake, potato
+strawberry, melon, blueberry, watermelon, apple, kiwi, shiitake, potato
+melon, cherry, blueberry, watermelon, plum, kiwi
+melon, cherry, peach, blueberry, watermelon, plum, eggplant, bell pepper, cucumber, tomato, edamame, lettuce
+melon, cherry, peach, grape, blueberry, pear, watermelon, plum, persimmon, fig, eggplant, bell pepper, cucumber, tomato, edamame, lettuce
+melon, peach, grape, pear, plum, persimmon, fig, apple, eggplant, bell pepper, cucumber, tomato, edamame, lettuce
+grape, pear, persimmon, fig, apple, kiwi, sweet potato, pumpkin, shimeji, shiitake
+persimmon, apple, kiwi, sweet potato, pumpkin, shimeji, shiitake 
+persimmon, apple, kiwi, sweet potato, pumpkin, shimeji, shiitake

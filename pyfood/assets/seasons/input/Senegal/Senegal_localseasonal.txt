@@ -1,0 +1,12 @@
+ananas, avocat, citron vert, fraise, melon, pamplemousse, pasteque, tomate, asperge, aubergine, chou, courgette, gombo, haricot vert, oignon, oignon nouveau, patate douce, poivron, pomme de terre, potimarron
+ananas, avocat, citron vert, fraise, melon, pamplemousse, pasteque, tomate, asperge, aubergine, chou, carotte, courgette, gombo, haricot vert, oignon, oignon nouveau, patate douce, poivron, pomme de terre, potimarron
+ananas, avocat, citron vert, fraise, melon, pamplemousse, pasteque, tomate, asperge, aubergine, chou, carotte, courgette, gombo, haricot vert, oignon, oignon nouveau, patate douce, poivron, pomme de terre, potimarron
+ananas, avocat, citron vert, mangue, melon, pamplemousse, pasteque, tomate, asperge, aubergine, chou, carotte, courgette, gombo, haricot vert, oignon, oignon nouveau, patate douce, poivron, pomme de terre, potimarron
+ananas, avocat, mangue, melon, pasteque, tomate, aubergine, carotte, chou, courgette, gombo, oignon, oignon nouveau, patate douce, poivron, pomme de terre, potimarron
+ananas, avocat, mangue, melon, tomate, aubergine, carotte, courgette, oignon, patate douce, potimarron
+ananas, avocat, mangue, melon, pasteque, tomate, gombo, oignon, patate douce
+ananas, avocat, mangue, pasteque, gombo, oignon, patate douce
+ananas, avocat, citron vert, mangue, pasteque, gombo, patate douce
+ananas, avocat, citron vert, mangue, pasteque, aubergine, chou, courgette, gombo, patate douce
+ananas, avocat, citron vert, fraise, mangue, pamplemousse, pasteque, asperge, aubergine, chou, courgette, gombo, patate douce, potimarron
+ananas, avocat, citron vert, fraise, melon, pamplemousse, pasteque, tomate, asperge, aubergine, chou, courgette, gombo, haricot vert, patate douce, pomme de terre, potimarron

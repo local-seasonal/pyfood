@@ -1,0 +1,12 @@
+ananas, avocat, banane, citron, clementine, grenade, kaki, kiwi, mandarine, mangue, orange, pamplemousse, papaye, litchi, fruit de la passion
+avocat, banane, citron, clementine, grenade, kiwi, mandarine, mangue, orange, pamplemousse
+avocat, banane, citron, kiwi, mandarine, mangue, orange, pamplemousse
+avocat, banane, citron, kiwi, mangue, orange, pamplemousse
+banane, citron, mangue, orange, pamplemousse
+banane, citron
+banane, citron
+banane, citron
+banane, citron, grenade
+banane, citron, datte, grenade
+avocat, banane, citron, clementine, grenade, kaki, kiwi, mangue, mandarine, datte, orange, 
+ananas, avocat, banane, citron, clementine, grenade, kaki, kiwi, mandarine, mangue, orange, pamplemousse, papaye

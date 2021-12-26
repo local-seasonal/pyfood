@@ -1,0 +1,39 @@
+{
+    "Energy": {
+        "kCal": 2150
+    },
+    "Macro": {
+        "Protein": 50,
+        "Lipides": 70,
+        "AcidesGrasSatures": 20,
+        "AcidesOrganiques": -1,
+        "Glucides": 260,
+        "Sucre": 90,
+        "Fibres": -1
+    },
+    "Minerals": {
+        "Ca": 800,
+        "Cu": 1,
+        "Fe": 14,
+        "I": 150,
+        "Mg": 374.98,
+        "Mn": 2,
+        "P": 699.98,
+        "K": 2000,
+        "Se": 55,
+        "Na": -1,
+        "Zn": 10
+    },
+    "Vitamins": {
+        "A": 850,
+        "B1": 1.1,
+        "B2": 1.4,
+        "B3": 16,
+        "B5": 6.0,
+        "B6": 1.4,
+        "B9": 200,
+        "C": 79.37,
+        "E": 12.0,
+        "Beta": -1
+    }
+}

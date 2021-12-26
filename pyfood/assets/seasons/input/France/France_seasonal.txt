@@ -1,0 +1,12 @@
+ananas, avocat, bergamote, cherimoya, datte, grenade, litchi, mangue, papaye, ramboutan, kumquat, sapotille
+ananas, avocat, bergamote, cherimoya, datte, grenade, litchi, mangue, papaye, kumquat, sapotille
+ananas, avocat, cherimoya, datte, grenade, mangue, papaye, kumquat
+ananas, avocat, cherimoya, durian, mangue, papaye
+cherimoya, durian, mangue, manioc
+durian, manioc, pourpier
+durian, gombo, manioc, pourpier, arnica
+baie de goji, cardon, durian, datte, figue de barbarie, melon cornu, gombo, manioc, pourpier
+baie de goji, cardon, canneberge, cedrat, datte, figue de barbarie, melon cornu, igname, gombo, manioc, pourpier
+ananas, avocat, baie de goji, cardon, chayote, cherimoya, canneberge, cedrat, datte, figue de barbarie, grenade, papaye, igname, manioc, pourpier, sapotille
+ananas, avocat, cherimoya, canneberge, cedrat, chayote, datte, grenade, litchi, mangue, papaye, igname, kumquat, sapotille
+ananas, avocat, cherimoya, canneberge, datte, grenade, litchi, mangue, papaye, ramboutan, kumquat, sapotille
