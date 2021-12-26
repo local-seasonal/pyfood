@@ -18,11 +18,10 @@
     <img src="https://codecov.io/gh/username/repo/branch/main/graph/badge.svg?token=token"/>
   </a>
   -->
-  <!-- Documentation
-  <a href="https://readthedocs.org/">
-    <img src="https://img.shields.io/website?label=docs&style=flat-square&url=website_url" alt="documentation">
+  <!-- Documentation -->
+  <a href="https://pyfood.readthedocs.io/en/latest/">
+    <img src="https://img.shields.io/website?label=docs&style=flat-square&url=https://readthedocs.org/projects/pyfood/" alt="documentation">
   </a>
-  -->
   </a>
   <!-- PyPI -->
   <a href="https://pypi.org/project/pyfood">
@@ -114,7 +113,7 @@ vegetables_in_season = shelf.get_seasonal_food(key='002')
 
 ## Useful links
 
-- [Documentation]() See `docs/build/index.html`
+- [Documentation](https://pyfood.readthedocs.io/en/latest/)
 - [Issue tracker](https://github.com/local-seasonal/pyfood/issues)
 - [Package releases](https://pypi.org/project/pyfood/#history)
 
