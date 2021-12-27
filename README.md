@@ -8,16 +8,10 @@
 </br>
 
 <p align="center">
-  <!-- Tests
-  <a href="https://github.com/username/repo/actions/workflows/unit-tests.yml">
-    <img src="https://github.com/username/repo/actions/workflows/unit-tests.yml/badge.svg" alt="tests">
+  <!-- Code coverage -->
+  <a href="https://codecov.io/gh/local-seasonal/pyfood">
+    <img src="https://codecov.io/gh/local-seasonal/pyfood/branch/main/graph/badge.svg?token=3Z6ZV18Y77"/>
   </a>
-   -->
-  <!-- Code coverage 
-  <a href="https://codecov.io/gh/username/repo">
-    <img src="https://codecov.io/gh/username/repo/branch/main/graph/badge.svg?token=token"/>
-  </a>
-  -->
   <!-- Documentation -->
   <a href="https://pyfood.readthedocs.io/en/latest/">
     <img src="https://img.shields.io/website?label=docs&style=flat-square&url=https://readthedocs.org/projects/pyfood/" alt="documentation">
