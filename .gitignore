@@ -14,7 +14,9 @@ lib/
 
 # Unit test / coverage reports
 .coverage
+.coverage.*
 .pytest_cache/
+coverage.xml
 
 # For MacOS
 .DS_store
