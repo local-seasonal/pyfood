@@ -3,7 +3,7 @@ Pyfood Assets
 
 Food is a universal language and Pyfood is a simple Python package to process food. It comes with assets described below to automatically extract, tag or translate baskets of food, recipes or cookbooks with labels, e.g. vegetarian, vegan, nutrition or seasonality.
 
-Important note: Pyfood is still work in progress. Therefore, some fields below might be empty and need further work. You're welcome to `open an issue on Github <https://github.com/MichelDeudon/pyfood/issues>`_ or reach out directly to the project contributors for any question, comment or feedback. Thank you! 🙏
+Important note: Pyfood is still work in progress. Therefore, some fields below might be empty and need further work. You're welcome to `open an issue on Github <https://github.com/local-seasonal/pyfood/issues>`_ or reach out directly to the project contributors for any question, comment or feedback. Thank you! 🙏
 
 Vocabulary
 ----------
@@ -125,4 +125,4 @@ Seasonality
 What ingredient is in season (cf taxon code **0xx**) is written in text files under ``assets/seasons/input/`` (12 rows per ``region``, each corresponding to a ``month_id``)
 This information is saved as sparse matrices for efficient storage and calculations.
 
-To add or modify information for a given ``region``, please `open an issue on Github <https://github.com/MichelDeudon/pyfood/issues>`_ or reach out directly to the project contributors. Thank you! 🙏
+To add or modify information for a given ``region``, please `open an issue on Github <https://github.com/local-seasonal/pyfood/issues>`_ or reach out directly to the project contributors. Thank you! 🙏
