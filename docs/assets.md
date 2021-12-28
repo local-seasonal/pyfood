@@ -124,5 +124,3 @@ Seasonality
 
 What ingredient is in season (cf taxon code **0xx**) is written in text files under ``assets/seasons/input/`` (12 rows per ``region``, each corresponding to a ``month_id``)
 This information is saved as sparse matrices for efficient storage and calculations.
-
-To add or modify information for a given ``region``, please `open an issue on Github <https://github.com/local-seasonal/pyfood/issues>`_ or reach out directly to the project contributors. Thank you! 🙏

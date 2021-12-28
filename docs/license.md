@@ -10,5 +10,4 @@ Credits
 -------
 
 | 📊 `CIQUAL ANSES <https://ciqual.anses.fr/>`_
-| 📷 `Pexels <https://www.pexels.com/>`_
-| 📷 `Unsplash <https://unsplash.com/>`_
+| 📷 `Pexels <https://www.pexels.com/>`_ and `Unsplash <https://unsplash.com/>`_

@@ -9,9 +9,9 @@ You can load a shelf embedded in France in January with the following Python sni
     from pyfood.utils import Shelf
     shelf = Shelf(region='France', month_id=0) 
 
-Pyfood currently works with the following regions: **France** 🇫🇷, **Italy** 🇮🇹, **Spain** 🇪🇸, **Portugal** 🇵🇹, **Germany** 🇩🇪, **EU** 🇪🇺 (Europe, default), **United Kingdom** 🇬🇧, **Canada** 🇨🇦, **Japan** 🇯🇵, **Israel** 🇮🇱 and **Senegal** 🇸🇳. It supports the following languages **EN** (English), **FR** (French), **ES** (Spanish), **IT** (Italian), **DE** (German), **PT** (Portuguese) and **UN** (Universal, default)
+Pyfood supports the following language by default ``UN`` (**Universal**), which includes ``DE`` (German), ``EN`` (English), ``ES`` (Spanish). ``FR`` (French), ``IT`` (Italian), ``PT`` (Portuguese). Pyfood works in the following region by default ``EU`` (**Europe**), which includes ``France``, ``Germany``, ``Italy``, ``Portugal``, ``Spain``, ``United Kingdom``. Support for ``Canada``, ``Israel``, ``Japan`` and ``Senegal`` is also provided.
 
-Pyfood shelf
+Pyfood Shelf
 -------------
 
 .. autoclass:: pyfood.utils.Shelf

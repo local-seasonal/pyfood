@@ -55,7 +55,7 @@ copyright = "2021, Local Seasonal"
 author = "Local Seasonal"
 
 # The full version, including alpha/beta/rc tags
-release = "0.0.1"
+release = "0.0.4"
 
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
@@ -78,8 +78,8 @@ todo_include_todos = True
 # a list of builtin themes.
 #
 html_theme = "sphinx_rtd_theme"
-html_favicon = "favicon.ico"
-html_logo = "img/logo.png"
+html_favicon = "img/favicon.png"
+# html_logo = "img/logo.png"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

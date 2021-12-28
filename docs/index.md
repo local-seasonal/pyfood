@@ -8,7 +8,7 @@ Pyfood documentation
 
 
 Pyfood is a simple Python package to process food, in different languages.
-It can be used to extract ingredients from a list of words, label food with categories (e.g., fruits, vegetables) and baskets or recipes with labels (e.g. vegetarian, vegan, nutrition or seasonality). Pyfood comes with a vocabulary of more than 600 ingredients and synonymes, and makes it easy to work with data in different languages or translate ingredients from a language to another one.
+It can help to **extract, translate, label** ingredients from a basket of food, a recipe or a cookbook with multiple labels, e.g. vegetarian, vegan, nutrition or seasonality. Pyfood comes with a vocabulary of more than 600 ingredients and synonymes, and makes it easy to work with data in different languages.
 
 .. toctree::
    :maxdepth: 2

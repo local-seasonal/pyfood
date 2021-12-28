@@ -62,7 +62,7 @@ def str2ngrams(string: str) -> List[str]:
 
 
 class Shelf(object):
-    """Pyfood shelf embedded in a given region, month_id and optionally source language"""
+    """Shelf object embedded in a given region, month_id and optionally source language"""
 
     def __init__(self, region: str = "EU", lang_source: str = "un", month_id: int = 0):
         """Instantiates a shelf from a context (region, lang_source, month_id)."""
