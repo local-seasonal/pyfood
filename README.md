@@ -51,22 +51,11 @@ from pyfood.utils import Shelf
 shelf = Shelf(region='France', month_id=0)
 ```
 
-Pyfood currently works in the following regions: 
-- **Canada** 🇨🇦
-- **EU** 🇪🇺 (Europe, default)
-- **France** 🇫🇷
-- **Germany** 🇩🇪
-- **Israel** 🇮🇱 
-- **Italy** 🇮🇹
-- **Japan** 🇯🇵
-- **Portugal** 🇵🇹
-- **Senegal** 🇸🇳
-- **Spain** 🇪🇸
-- **United Kingdom** 🇬🇧
+Pyfood works in the following region by default ``EU`` (**Europe**), which includes ``France``, ``Germany``, ``Italy``, ``Portugal``, ``Spain``, ``United Kingdom``. Support for ``Canada``, ``Israel``, ``Japan`` and ``Senegal`` is also provided
 
 ### 🍐 Label baskets or recipes
 
-Pyfood can help automatically extract and label a list of ingredients, e.g., from a basket of food, a recipe, a menu, a cookbook or a website, with attributes/categories (e.g., fruits, vegetables) and labels (e.g., vegetarian, vegan, nutrition, seasonality), in a few lines of code:
+In a few lines of code, Pyfood can help automatically **extract, translate, label** a list of ingredients, e.g., from a basket of food, [a recipe](https://www.local-seasonal.org/chefs/Binet%20Soup/cookbook?name=Gazpacho), a menu, [a cookbook](https://www.local-seasonal.org/chefs/Binet%20Soup/cookbook) or a webapp, with multiple labels, e.g., vegetarian, vegan, nutrition and seasonality:
 
 ```python
 results = shelf.process_ingredients(['apple','kiwi','sugar'])
@@ -81,14 +70,7 @@ results = shelf.process_ingredients(['apple','kiwi','sugar'], lang_dest='FR')
 results['food_list'] # pomme, kiwi, sucre
 ```
 
-Pyfood currently supports the following languages:
-- **DE** (German)
-- **EN** (English)
-- **ES** (Spanish)
-- **FR** (French)
-- **IT** (Italian)
-- **PT** (Portuguese)
-- **UN** (Universal, default)
+Pyfood supports the following language by default ``UN`` (**Universal**), which includes ``DE`` (German), ``EN`` (English), ``ES`` (Spanish). ``FR`` (French), ``IT`` (Italian), ``PT`` (Portuguese)
 
 ### 🍓 What's in season?
 
@@ -101,16 +83,15 @@ vegetables_in_season = shelf.get_seasonal_food(key='002')
 
 ## Credits
 
-📊 [CIQUAL ANSES](https://ciqual.anses.fr/) <br>
-📷 [Pexels](https://www.pexels.com/) <br>
-📷 [Unsplash](https://unsplash.com/)
+📊 [CIQUAL ANSES](https://ciqual.anses.fr/) <br/>
+📷 [Pexels](https://www.pexels.com/) and [Unsplash](https://unsplash.com/)
 
 ## Useful links
 
-- [Documentation](https://pyfood.readthedocs.io/en/latest/)
-- [Issue tracker](https://github.com/local-seasonal/pyfood/issues)
-- [Package releases](https://pypi.org/project/pyfood/#history)
+🛠️ [Documentation](https://pyfood.readthedocs.io/en/latest/)  <br/>
+🐛 [Issue tracker](https://github.com/local-seasonal/pyfood/issues)  <br/>
+🍕 [Package releases](https://pypi.org/project/pyfood/#history)
 
 ## License
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> by [Local Seasonal](https://www.local-seasonal.org/)
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>  <br/> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> by [Local Seasonal](https://www.local-seasonal.org/)
