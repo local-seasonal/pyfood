@@ -2,6 +2,9 @@
 __pycache__/
 *.pyc
 
+# Documentation
+docs/build/*
+
 # Distribution / packaging
 bdist.win-amd64/
 dist/
