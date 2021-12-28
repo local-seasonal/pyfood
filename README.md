@@ -67,7 +67,7 @@ Pyfood comes with a vocabulary of more than 600 ingredients and synonymes, in mu
 
 ```python
 results = shelf.process_ingredients(['apple','kiwi','sugar'], lang_dest='FR')
-results['food_list'] # pomme, kiwi, sucre
+results['ingredients_by_taxon'] # [[pomme, kiwi], [sucre]]
 ```
 
 Pyfood supports the following language by default ``UN`` (**Universal**), which includes ``DE`` (German), ``EN`` (English), ``ES`` (Spanish). ``FR`` (French), ``IT`` (Italian), ``PT`` (Portuguese)

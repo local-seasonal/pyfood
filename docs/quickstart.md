@@ -38,7 +38,7 @@ Pyfood comes with a vocabulary of more than 600 ingredients and synonymes, in mu
 .. code-block:: python
 
     results = shelf.process_ingredients(['apple','kiwi','sugar'], lang_dest='FR')
-    results['food_list'] # pomme, kiwi, sucre
+    results['ingredients_by_taxon'] # pomme, kiwi, sucre
 
 Pyfood supports the following language by default ``UN`` (**Universal**), which includes ``DE`` (German), ``EN`` (English), ``ES`` (Spanish). ``FR`` (French), ``IT`` (Italian), ``PT`` (Portuguese). Finally, Pyfood can also be used to simply query what fruits or vegetables are in season, which depends on the ``region`` and ``month_id`` selected.
 
