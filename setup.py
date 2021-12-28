@@ -18,6 +18,7 @@ setup(
     install_requires=[
         "numpy",
         "scikit-learn>=0.20.1",
+        "Unidecode>=1.1.0",
     ],
     python_requires=">=3.6",
 )

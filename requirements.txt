@@ -3,6 +3,6 @@ pandas>=0.23.4
 scikit-learn>=0.20.1
 scipy>=1.1.0
 matplotlib
-unidecode
+Unidecode>=1.1.0
 black
 pre-commit
