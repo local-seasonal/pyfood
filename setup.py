@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf8") as fh:
 
 setup(
     name="pyfood",
-    version="0.0.4",
+    version="0.0.5",
     author="Michel Deudon",
     author_email="michel@local-seasonal.org",
     license="Creative Commons Attribution 4.0 International License.",
@@ -18,6 +18,7 @@ setup(
     install_requires=[
         "numpy",
         "scikit-learn>=0.20.1",
+        "Unidecode>=1.1.0",
     ],
     python_requires=">=3.6",
 )

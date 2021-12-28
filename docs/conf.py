@@ -55,7 +55,7 @@ copyright = "2021, Local Seasonal"
 author = "Local Seasonal"
 
 # The full version, including alpha/beta/rc tags
-release = "0.0.4"
+release = "0.0.5"
 
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
