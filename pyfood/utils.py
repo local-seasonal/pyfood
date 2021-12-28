@@ -294,9 +294,9 @@ class Shelf(object):
     def NER(
         self,
         food_list: List[str],
-        qty_list: Optional[List[str]],
-        unit_list: Optional[List[str]],
-        lang_dest: Optional[str],
+        qty_list: Optional[List[str]] = None,
+        unit_list: Optional[List[str]] = None,
+        lang_dest: Optional[str] = None,
         filter_HS: bool = True,
     ) -> Tuple:
         """Named Entity Recognition on a food (+ optionally quantity and unit) list.
@@ -372,9 +372,9 @@ class Shelf(object):
     def process_ingredients(
         self,
         food_list: List[str],
-        qty_list: Optional[List[str]],
-        unit_list: Optional[List[str]],
-        lang_dest: Optional[str],
+        qty_list: Optional[List[str]] = None,
+        unit_list: Optional[List[str]] = None,
+        lang_dest: Optional[str] = None,
         revisit: bool = False,
         infer_nutri: bool = False,
         serving: int = 1,

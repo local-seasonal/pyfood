@@ -50,8 +50,7 @@ You can test that it was installed correctly by importing the package.
     
     import pyfood
 
-| When you are ready to upload a real package to the Python Package Index you can do much the same as in this tutorial, but with these important differences:
-| Choose a memorable and unique name for your package. You don’t have to append your username as you did in the tutorial.
+| When you are ready to upload a real package to the Python Package Index you can do much the same as in this tutorial.
 | Register an account on `https://pypi.org <https://pypi.org>`_ - note that these are two separate servers and the login details from the test server are not shared with the main server.
 
 Use twine upload dist/* to upload your package and enter your credentials for the account you registered on the real PyPI. Now that you’re uploading the package in production, you don’t need to specify --repository; the package will upload to `https://pypi.org <https://pypi.org>`_ by default.

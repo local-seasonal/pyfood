@@ -8,7 +8,7 @@ setup(
     version="0.0.4",
     author="Michel Deudon",
     author_email="michel@local-seasonal.org",
-    license="Creative Commons Attribution-NonCommercial 4.0 International License.",
+    license="Creative Commons Attribution 4.0 International License.",
     maintainer="Local Seasonal",
     description="Pyfood: A Python package to process food",
     long_description=long_description,
