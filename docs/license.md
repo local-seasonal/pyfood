@@ -4,7 +4,7 @@ License
 CC BY 4.0
 ------------
 
-`Pyfood <https://github.com/MichelDeudon/pyfood>`_ is licensed under a `Creative Commons Attribution 4.0 International License <http://creativecommons.org/licenses/by/4.0/>`_ by `Local Seasonal <https://www.local-seasonal.org/>`_
+`Pyfood <https://github.com/local-seasonal/pyfood>`_ is licensed under a `Creative Commons Attribution 4.0 International License <http://creativecommons.org/licenses/by/4.0/>`_ by `Local Seasonal <https://www.local-seasonal.org/>`_
 
 Credits
 -------

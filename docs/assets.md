@@ -8,7 +8,7 @@ Important note: Pyfood is still work in progress. Therefore, some fields below m
 Vocabulary
 ----------
 
-Similar to English, French or Music, `food as a language <hhttps://web.stanford.edu/~jurafsky/thelanguageoffood.html>`_ comes with its own alphabet, vocabulary and grammar.
+Similar to English, French or Music, `food as a language <https://web.stanford.edu/~jurafsky/thelanguageoffood.html>`_ comes with its own alphabet, vocabulary and grammar.
 The grammar deals with composition or how to make a soup out of ingredients, step by step. It's pretty well accessible and understood. 
 The vocabulary is about the ingredients themselves. What is a strawberry? Where and when does it grow? What benefits does it have?
 
